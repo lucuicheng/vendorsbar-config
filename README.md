@@ -1,3 +1,3 @@
-# vendorsbar-config
+# vendorsbar-order-config
 
-配置文件
+订单服务配置文件仓库
