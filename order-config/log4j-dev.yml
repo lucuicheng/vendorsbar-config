@@ -81,11 +81,11 @@ Configuration:
       - name: org.springframework
         level: INFO
       - name: org.apache.http
-          level: INFO
+        level: INFO
       - name: org.hibernate
-          level: INFO
+        level: INFO
       - name: org.mybatis.spring
-          level: INFO
+        level: INFO
       - name: com.vich.settings
         level: INFO
         AppenderRef:
