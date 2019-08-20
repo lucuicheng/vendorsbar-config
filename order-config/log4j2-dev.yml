@@ -1,6 +1,6 @@
 Configuration:
   status: debug
-  monitorInterval: 1800,
+  monitorInterval: "1800",
 
   Properties:
     Property:
