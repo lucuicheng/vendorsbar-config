@@ -1,12 +1,11 @@
 Configuration:
-  status: info
-  name: RoutingTest
+  status: debug
   monitorInterval: 1800
 
   Properties:
     Property:
       - name: LOG_HOME
-        value: vendorsbar-order
+        value: /
 
   appenders:
     #    OrderAppender:
