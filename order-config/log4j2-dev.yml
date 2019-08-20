@@ -8,11 +8,11 @@ Configuration:
         value: "vendorsbar-order"
 
   Appenders:
-    OrderAppender:
-      name: OrderAppender
-      target: SYSTEM_OUT
-      PatternLayout:
-        Pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+#    OrderAppender:
+#      name: OrderAppender
+#      target: SYSTEM_OUT
+#      PatternLayout:
+#        Pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
 
     Console:
       name: ConsoleAppender
@@ -86,10 +86,10 @@ Configuration:
         level: INFO
       - name: org.mybatis.spring
         level: INFO
-      - name: com.vich.settings
-        level: INFO
-        AppenderRef:
-          - ref: OrderAppender
+#      - name: com.vich.settings
+#        level: INFO
+#        AppenderRef:
+#          - ref: OrderAppender
 
     Root:
       level: ALL
