@@ -1,18 +1,20 @@
 Configuration:
   status: debug
+  name: RoutingTest
   monitorInterval: 1800
 
   Properties:
     Property:
       - name: LOG_HOME
-        value: "vendorsbar-order"
+        value: vendorsbar-order
 
-  Appenders:
-#    OrderAppender:
-#      name: OrderAppender
-#      target: SYSTEM_OUT
-#      PatternLayout:
-#        Pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+  appenders:
+    #    OrderAppender:
+    #      name: OrderAppender
+    #      fileName: log.log
+    #      target: SYSTEM_OUT
+    #      PatternLayout:
+    #        Pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
 
     Console:
       name: ConsoleAppender
@@ -28,8 +30,8 @@ Configuration:
           pattern: "%date{yyyy-MM-dd HH:mm:ss} %level [%thread][%file:%line] - %msg%n"
         Filters:
           ThresholdFilter:
-            - level: TRACE
-            - level: DEBUG
+            - level: trace
+            - level: debug
               onMatch: DENY
               onMismatch: NEUTRAL
         Policies:
@@ -47,8 +49,8 @@ Configuration:
           pattern: "%date{yyyy-MM-dd HH:mm:ss} %level [%thread][%file:%line] - %msg%n"
         Filters:
           ThresholdFilter:
-            - level: INFO
-            - level: WARN
+            - level: info
+            - level: warn
               onMatch: DENY
               onMismatch: NEUTRAL
         Policies:
@@ -66,7 +68,7 @@ Configuration:
           pattern: "%date{yyyy-MM-dd HH:mm:ss} %level [%thread][%file:%line] - %msg%n"
         Filters:
           ThresholdFilter:
-            - level: ERROR
+            - level: error
         Policies:
           TimeBasedTriggeringPolicy:
             modulate: true
@@ -79,22 +81,22 @@ Configuration:
   Loggers:
     logger:
       - name: org.springframework
-        level: INFO
+        level: info
       - name: org.apache.http
-        level: INFO
+        level: info
       - name: org.hibernate
-        level: INFO
+        level: info
       - name: org.mybatis.spring
-        level: INFO
-#      - name: com.vich.settings
-#        level: INFO
-#        AppenderRef:
-#          - ref: OrderAppender
+        level: info
+    #      - name: com.vich.order
+    #        level: info
+    #        AppenderRef:
+    #          - ref: OrderAppender
 
     Root:
-      level: ALL
+      level: all
       AppenderRef:
-        - ref: OrderAppender
+        - ref: ConsoleAppender
         - ref: RunningTrace
         - ref: RunningInfo
         - ref: RunningError
