@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="trace" monitorInterval="1800">
+    <properties>
+        <property name="LOG_HOME">vendorsbar-order</property>
+    </properties>
+
+    <Appenders>
+        <!-- 这个就是自定义的Appender -->
+        <orderAppender name="Order-Appender" fileName="log.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%-5p] {%F:%L} - %m%n" />
+        </orderAppender>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <RollingFile name="running-trace" fileName="${LOG_HOME}/trace.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/trace-%d{yyyy-MM-dd-HH}-%i.log">
+            <Filters>
+                <ThresholdFilter level="TRACE"/>
+                <ThresholdFilter level="DEBUG" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss} %level [%thread][%file:%line] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="4"/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <RollingFile name="running-info" fileName="${LOG_HOME}/info.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}info-%d{yyyy-MM-dd-HH}-%i.log">
+            <Filters>
+                <ThresholdFilter level="INFO"/>
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss} %level [%thread][%file:%line] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="4"/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <RollingFile name="running-error" fileName="${LOG_HOME}/error.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd-HH}-%i.log">
+            <Filters>
+                <ThresholdFilter level="ERROR"/>
+            </Filters>
+
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss} %level [%thread][%file:%line] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="4"/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- 框架应用型日志 -->
+        <logger name="org.springframework" level="INFO"></logger>
+        <logger name="com.zaxxer.hikari" level="INFO"></logger>
+        <logger name="org.thymeleaf.templateparser" level="INFO"></logger>
+        <logger name="org.thymeleaf" level="INFO"></logger>
+
+        <logger name="org.apache.http" level="INFO"></logger>
+        <logger name="org.hibernate" level="INFO"></logger>
+        <logger name="org.mybatis.spring" level="INFO"></logger>
+
+        <!-- 自定义需要采集的特殊日志 -->
+        <logger name="com.vich.settings" level="INFO">
+            <appender-ref ref="Order-Appender"/>
+        </logger>
+
+        <!-- SQL调试：注释掉就能查看打印出来的SQ语句begin -->
+        <!--          <logger name="org.mybatis.spring" level="INFO"></logger>  -->
+        <!--          <logger name="com.hrms.mapper" level="INFO"></logger> -->
+        <!-- SQL调试：注释掉就能查看打印出来的SQ语句end -->
+
+        <Root level="all">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="running-trace"/>
+            <AppenderRef ref="running-info"/>
+            <AppenderRef ref="running-error"/>
+        </Root>
+    </Loggers>
+</Configuration>
